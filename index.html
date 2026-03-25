@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevKids - Pequeno Programador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8B5CF6; /* Roxo vibrante */
+            --secondary-color: #0B1320; /* Fundo azul petróleo escuro */
+            --accent-color: #10B981; /* Verde neon para botões */
+            --text-light: #F3F4F6;
+            --text-dark: #1F2937;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            line-height: 1.6;
+            padding-top: 70px;
+        }
+
+        /* Menu Fixo (Navbar) */
+        .navbar {
+            background-color: rgba(11, 19, 32, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section - CAPA */
+        .hero {
+            background-image: url('https://i.postimg.cc/NM5CYPng/capa_site.png');
+            background-size: cover;
+            background-position: center;
+            padding: 4rem 2rem 3rem 2rem; 
+            text-align: left;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.45);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            color: #111;
+            font-weight: 800;
+            background-color: rgba(16, 185, 129, 0.2);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 5px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #000;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #111;
+            font-weight: 600;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #059669;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Seção: Por que matricular */
+        .benefits {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .benefits h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefits > p {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #DDD6FE;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .benefits-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+
+        .benefits-text {
+            flex: 1.2;
+        }
+
+        .benefits-image {
+            flex: 0.8;
+            text-align: center;
+        }
+
+        .benefits-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 1.05rem; 
+            color: #E5E7EB;
+        }
+
+        .benefits-list strong {
+            color: #fff;
+        }
+
+        /* Seção: Prova Social */
+        .social-proof {
+            padding: 5rem 2rem;
+            text-align: center;
+            background-color: #080D17;
+        }
+
+        .social-proof h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .social-proof p {
+            font-size: 1.1rem;
+            color: #DDD6FE;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .proof-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .proof-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Seção: Módulos */
+        .modules {
+            background-color: var(--secondary-color);
+            padding: 5rem 2rem;
+        }
+
+        .modules h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .modules > p {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #DDD6FE;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .module-images-container {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0; 
+        }
+
+        .module-image-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .module-image-wrapper img {
+            display: block; 
+            width: 100%;
+            max-width: 850px; 
+            height: auto;
+            border: none;
+            box-shadow: none;
+            border-radius: 0; 
+        }
+
+        /* Seção: Professor Lian */
+        .teacher-section {
+            background-color: #121E31;
+            padding: 5rem 2rem;
+        }
+
+        .teacher-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .teacher-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .teacher-image img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 50%;
+            border: 6px solid var(--primary-color);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .teacher-text {
+            flex: 2;
+            color: #fff;
+        }
+
+        .teacher-text h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .teacher-text h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .teacher-text p {
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+            color: #E5E7EB;
+            line-height: 1.8;
+        }
+
+        /* Seção: Bônus */
+        .bonus-section {
+            padding: 5rem 2rem;
+            background-color: var(--secondary-color);
+        }
+
+        .bonus-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1100px; 
+            margin: 0 auto;
+        }
+
+        .bonus-card {
+            background-color: #fff;
+            color: var(--text-dark);
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-align: left; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bonus-card h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bonus-card h3 span {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        .bonus-card p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .bonus-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: auto; 
+        }
+
+        .bonus-card ul li {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .purple-text {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Seção: Preço */
+        .pricing {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #6D28D9, #8B5CF6);
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .pricing h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pricing .old-price {
+            text-decoration: line-through;
+            font-size: 1.5rem;
+            color: #DDD6FE;
+            margin-top: 1rem;
+        }
+
+        .pricing .new-price {
+            font-size: 4rem; /* Ajustado para acomodar o texto maior */
+            font-weight: 800;
+            margin: 0.5rem 0;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Seção: Garantia */
+        .guarantee {
+            background-color: #050A14;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .guarantee p {
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            font-size: 1.1rem;
+        }
+
+        /* Seção: FAQ */
+        .faq-section {
+            padding: 5rem 2rem;
+            background-color: #121E31;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            color: var(--text-dark);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        details {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #E5E7EB;
+            padding-bottom: 1rem;
+        }
+
+        details:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        summary {
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '+';
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        details[open] summary::after {
+            content: '-';
+        }
+
+        details p {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #4B5563;
+            line-height: 1.6;
+        }
+        
+        /* Rodapé / Footer Limpo */
+        footer {
+            background-color: #03060A;
+            color: #9CA3AF;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { display: none; }
+            body { padding-top: 0; }
+            .hero { text-align: center; padding: 4rem 1rem 3rem 1rem; }
+            .hero-content { margin: 0 auto; }
+            .hero h1 { font-size: 2.2rem; }
+            .benefits-container { flex-direction: column-reverse; }
+            .benefits h2, .modules h2, .bonus-section h2, .faq-section h2, .social-proof h2, .teacher-text h2, .pricing h2 { font-size: 1.8rem; }
+            .pricing .new-price { font-size: 2.5rem; } /* Tamanho menor no celular para o "10x de..." não quebrar a tela */
+            .teacher-container { flex-direction: column; text-align: center; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#beneficios">Benefícios</a>
+        <a href="#alunos">Alunos</a>
+        <a href="#modulos">O Curso</a>
+        <a href="#professor">Professor</a>
+        <a href="#bonus">Bônus</a>
+        <a href="#duvidas">Dúvidas</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h2>Programação Criativa</h2>
+            <h1>Pequeno Programador</h1>
+            <p>Onde seu filho cria mundos com código e a imaginação voa! 🚀</p>
+            <a href="https://pay.hotmart.com/L97458420T?bid=1774437422395" class="btn">QUERO PREPARAR MEU FILHO PARA O FUTURO 💻</a>
+        </div>
+    </header>
+
+    <section class="benefits" id="beneficios">
+        <h2>Transforme o tempo de tela do seu filho 🎮</h2>
+        <p>Pare de se preocupar com o tempo gasto no celular. Na DevKids, ele deixa de ser apenas um jogador para se tornar um criador de tecnologia.</p>
+        
+        <div class="benefits-container">
+            <div class="benefits-text">
+                <ul class="benefits-list">
+                    <li>✅ <span><strong>Desenvolvimento da criatividade:</strong> Eles imaginam o jogo, nós ensinamos como construir.</span></li>
+                    <li>✅ <span><strong>Foco e raciocínio lógico:</strong> A programação treina o cérebro para resolver problemas inteligentes.</span></li>
+                    <li>✅ <span><strong>Aulas curtas e dinâmicas:</strong> Sem enrolação, 100% focado na atenção infantil.</span></li>
+                    <li>✅ <span><strong>Criação de jogos do ZERO!</strong> Ele verá o resultado do próprio esforço na tela.</span></li>
+                    <li>✅ <span><strong>Aprendizagem baseada em Projetos:</strong> Aprende colocando a mão na massa.</span></li>
+                    <li>✅ <span><strong>Conteúdo sob medida:</strong> Linguagem simples e divertida para crianças.</span></li>
+                </ul>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="https://pay.hotmart.com/L97458420T?bid=1774437422395" class="btn" style="font-size: 1.1rem; padding: 1rem 1.5rem;">GARANTIR VAGA AGORA</a>
+                </div>
+            </div>
+            
+            <div class="benefits-image">
+                <img src="https://i.postimg.cc/sgjcsNB4/aluno.png" alt="Criança aprendendo programação">
+            </div>
+        </div>
+    </section>
+
+    <section class="social-proof" id="alunos">
+        <h2>🎮 Veja os jogos que nossos alunos estão criando</h2>
+        <p>Estas são imagens reais de crianças usando nosso curso para criar seus próprios jogos.</p>
+        
+        <div class="proof-container">
+            <img src="https://i.postimg.cc/TYr7Rbtd/prova_social_2.png" alt="Depoimentos reais de pais e alunos do curso Pequeno Programador">
+        </div>
+        
+        <div class="btn-container">
+            <a href="https://pay.hotmart.com/L97458420T?bid=1774437422395" class="btn">QUERO VER MEU FILHO CRIANDO ASSIM 🚀</a>
+        </div>
+    </section>
+
+    <section class="modules" id="modulos">
+        <h2>O que seu filho vai aprender na prática? 👇</h2>
+        <p><strong>Uma jornada gamificada passo a passo:</strong> seu filho sai do zero e cria jogos incríveis que ele mesmo vai adorar jogar (e mostrar para a família!). Cada módulo foi desenhado para prender a atenção e transformar o aprendizado em pura diversão.</p>
+        
+        <div class="module-images-container">
+            <div class="module-image-wrapper">
+                <img src="https://i.postimg.cc/MTv3xrLS/modulo_1_e_2.png" alt="Módulo 1: Primeiros Passos e Módulo 2: Jogo do Labirinto">
+            </div>
+            <div class="module-image-wrapper">
+                <img src="https://i.postimg.cc/B6X7swz3/modulo_3_e_4.png" alt="Módulo 3: Caça as Bananas e Módulo 4: Jogo do Aviãozinho">
+            </div>
+        </div>
+    </section>
+
+    <section class="teacher-section" id="professor">
+        <div class="teacher-container">
+            <div class="teacher-image">
+                <img src="https://i.postimg.cc/cHrkZ5zG/Lian.jpg" alt="Professor Lian Ribeiro">
+            </div>
+            <div class="teacher-text">
+                <h2>Quem vai Guiar seu Filho? 👨‍🏫</h2>
+                <h3>Professor Lian Ribeiro</h3>
+                <p>Licenciado em Computação pelo IFTM de Uberlândia MG e Professor de Informática na escola municipal de Uberaba - MG, trago na bagagem anos de experiência real em sala de aula, lidando todos os dias com a curiosidade e o aprendizado de crianças e jovens.</p>
+                <p>Minha missão é clara: transformar a lógica de programação em uma grande brincadeira. Onde a maioria vê "telas", eu vejo um laboratório para o futuro. Comigo, seu filho não vai apenas decorar códigos; ele vai se divertir superando desafios e desenvolvendo habilidades críticas que nenhuma escola tradicional ensina. Vamos juntos transformar seu pequeno em um criador digital!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bonus-section" id="bonus">
+        <h2>Adquira agora e garanta <span class="purple-text">BÔNUS EXCLUSIVOS!</span></h2>
+        <div class="bonus-grid">
+            
+            <div class="bonus-card">
+                <h3><span>🎁 BÔNUS 1</span></h3>
+                <h3 style="font-size: 1.1rem; text-transform: uppercase;">Programação com Minecraft</h3>
+                <p>Seu filho aprende programação de forma divertida no mundo do Minecraft! 🚀</p>
+                <ul>
+                    <li>✅ Conceitos Básicos de Programação</li>
+                    <li>✅ Atividades extras Aventuras Criativas</li>
+                    <li>✅ Desafios Cenários de Construção</li>
+                </ul>
+            </div>
+
+            <div class="bonus-card">
+                <h3><span>🎁 BÔNUS 2</span></h3>
+                <h3 style="font-size: 1.1rem; text-transform: uppercase;">Exercícios Resolvidos</h3>
+                <p>Uma playlist com <strong class="purple-text">Exercícios de Matemática e Português</strong> resolvidos em videoaula passo a passo. Desafios de lógica aplicada!</p>
+                <ul>
+                    <li>✅ Algoritmos de cálculo de idade</li>
+                    <li>✅ Dobro e quadrado de números</li>
+                    <li>✅ Lógica matemática visual</li>
+                </ul>
+            </div>
+
+            <div class="bonus-card">
+                <h3><span>🎁 BÔNUS 3</span></h3>
+                <h3 style="font-size: 1.1rem; text-transform: uppercase;">Ebook Atividades Extras</h3>
+                <p>Acesso a <strong class="purple-text">83 atividades extras</strong> para explorar, criar e se desafiar no universo da programação.</p>
+                <ul>
+                    <li>✅ Crie uma história interativa</li>
+                    <li>✅ Detecção de Movimento com Vídeo</li>
+                    <li>✅ Projetos variados para treinar</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="pricing" id="comprar">
+        <h2>Tudo pronto para o futuro do seu filho?</h2>
+        <p style="color: #fff; font-size: 1.2rem;">Não deixe ele apenas consumir tecnologia. Ensine a criá-la.</p>
+        <p class="old-price">De R$ 897,00</p>
+        <p style="color: #DDD6FE;">Leve hoje com acesso completo por apenas:</p>
+        
+        <div class="new-price">10x de R$ 35,99</div>
+        <p style="color: #10B981; font-weight: bold; font-size: 1.5rem; margin-bottom: 0.5rem;">ou R$ 297,00 à vista</p>
+        <p style="color: #fff; margin-bottom: 2rem;">Pagamento seguro à vista ou parcelado no cartão.</p>
+        
+        <a href="https://pay.hotmart.com/L97458420T?bid=1774437422395" class="btn" style="font-size: 1.5rem; padding: 1.2rem 3rem;">QUERO MATRICULAR MEU FILHO AGORA 💻</a>
+    </section>
+
+    <section class="guarantee">
+        <h2 style="color: var(--primary-color); margin-bottom: 1rem;">EXPERIMENTE COM 7 DIAS DE GARANTIA Risco Zero 💎</h2>
+        <p>Você pode testar nosso curso sem compromisso. Durante 7 dias você terá acesso a todo o conteúdo. Se por qualquer motivo seu filho não gostar ou você achar que não é para ele, devolvemos 100% do seu investimento sem letrinhas miúdas.</p>
+    </section>
+
+    <section class="faq-section" id="duvidas">
+        <h2>❓ Perguntas frequentes dos Pais</h2>
+        <div class="faq-container">
+            
+            <details>
+                <summary>A partir de qual idade meu filho pode começar?</summary>
+                <p>Sugerimos a faixa dos 8 a 12 anos, que é a idade ideal onde a curiosidade está a mil e eles absorvem tecnologia como esponjas! Mas como a linguagem visual de programação (feita com blocos que se encaixam) é super intuitiva, crianças a partir de 7 anos também conseguem acompanhar perfeitamente e se divertir muito criando seus primeiros projetos.</p>
+            </details>
+
+            <details>
+                <summary>As aulas são ao vivo ou gravadas?</summary>
+                <p>O curso principal é 100% focado em aulas gravadas, com um passo a passo estruturado para a criança assistir no ritmo dela, pausar e rever quando quiser. Caso seu filho precise de ajuda extra durante os projetos, nós oferecemos a opção de você adquirir aulas ao vivo de mentoria diretamente comigo (compradas de forma avulsa ou em pacotes) para tirar todas as dúvidas!</p>
+            </details>
+
+            <details>
+                <summary>Meu filho pode assistir sozinho?</summary>
+                <p>Sim! O curso foi pensado para ser didático e acessível. As aulas seguem um passo a passo claro que ajuda a criança a aprender de forma autônoma. Claro, se quiser assistir junto, é uma ótima forma de interagir com ele!</p>
+            </details>
+
+            <details>
+                <summary>Preciso instalar programas pesados ou ter um super computador?</summary>
+                <p>Não! Todo o conteúdo e as ferramentas de criação são acessados direto pelo navegador. Um computador ou notebook básico com internet é mais que suficiente.</p>
+            </details>
+
+            <details>
+                <summary>Por quanto tempo terei acesso ao curso?</summary>
+                <p>Você terá acesso ao conteúdo por 1 ano inteiro, podendo assistir quantas vezes quiser.</p>
+            </details>
+
+            <details>
+                <summary>O curso emite certificado?</summary>
+                <p>Sim! Ao finalizar as aulas, seu filho receberá um lindo certificado de conclusão para se orgulhar da conquista!</p>
+            </details>
+
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>DevKids - Pequeno Programador</strong> © 2026. Todos os direitos reservados.</p>
+        <p>Professor Lian Ribeiro | Licenciado em Computação</p>
+        
+        <p style="color: #050A14; font-size: 0.7rem; margin-top: 2rem;">Este site não faz parte do site do Facebook ou da Facebook Inc. Além disso, este site não é endossado pelo Facebook de nenhuma maneira. FACEBOOK é uma marca comercial independente da FACEBOOK, Inc.</p>
+    </footer>
+
+</body>
+</html>
